@@ -73,8 +73,12 @@ class UNetGenerator(nn.Module):
 
     def _conv_block(self, in_c, out_c, norm=True, activation=True):
         layers = [nn.Conv2d(in_c, out_c, 4, 2, 1, bias=False)]
-        if norm and "instance" in self.dna.norm_type:
-            layers.append(nn.InstanceNorm2d(out_c))
+        if norm:
+            if self.dna.norm_type == "instance":
+                layers.append(nn.InstanceNorm2d(out_c))
+            elif self.dna.norm_type == "batch":
+                layers.append(nn.BatchNorm2d(out_c))
+            # norm_type == "none" means no normalization
         if activation:
             layers.append(nn.LeakyReLU(0.2, inplace=True))
         return nn.Sequential(*layers)
@@ -167,8 +171,6 @@ def process(self, input_A):
 
     def adversarial_loss(self, fake_B, input_A, target_B):
         # Discriminator loss
-        real_pair = torch.cat([input_A, target_B], 1)
-        fake_pair = torch.cat([input_A, fake_B.detach()], 1)
         loss_D_real = self.loss_GAN(self.D(target_B, input_A), torch.ones_like(self.D(target_B, input_A)))
         loss_D_fake = self.loss_GAN(self.D(fake_B.detach(), input_A), torch.zeros_like(self.D(fake_B.detach(), input_A)))
         loss_D = (loss_D_real + loss_D_fake) * 0.5
