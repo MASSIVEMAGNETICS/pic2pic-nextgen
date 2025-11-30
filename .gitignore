@@ -1,0 +1,55 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+.pnpm-debug.log*
+*.egg-info/
+.eggs/
+dist/
+build/
+*.whl
+
+# Environment
+.env
+.env.local
+.env.*.local
+.venv/
+venv/
+env/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Build outputs
+web-client/build/
+web-client/.svelte-kit/
+desktop/src-tauri/target/
+
+# Testing
+coverage/
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+
+# Application data
+uploads/
+checkpoints/
+presets/
+*.holo
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp

@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--color-primary: #6366f1;
+	--color-secondary: #22d3ee;
+	--color-accent: #f472b6;
+	--color-surface: #1e1e2e;
+	--color-surface-light: #313244;
+	--color-text: #cdd6f4;
+	--color-text-muted: #6c7086;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+	background: var(--color-surface);
+	color: var(--color-text);
+	min-height: 100vh;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--color-surface);
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--color-surface-light);
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--color-text-muted);
+}
+
+/* Utility classes */
+.glass {
+	background: rgba(30, 30, 46, 0.8);
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glow {
+	box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+}
+
+.gradient-border {
+	border: 2px solid transparent;
+	background: linear-gradient(var(--color-surface), var(--color-surface)) padding-box,
+		linear-gradient(135deg, var(--color-primary), var(--color-secondary)) border-box;
+}
