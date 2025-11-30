@@ -31,6 +31,7 @@ Thumbs.db
 web-client/build/
 web-client/.svelte-kit/
 desktop/src-tauri/target/
+desktop/src-tauri/gen/
 
 # Testing
 coverage/
