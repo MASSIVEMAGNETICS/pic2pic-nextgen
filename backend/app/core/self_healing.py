@@ -222,9 +222,13 @@ class SelfHealingWatchdog:
         self,
         restart_delay: float = 3.0,
         health_check_interval: float = 30.0,
+        max_memory_mb: float = 4096.0,
+        cpu_temp_threshold: float = 85.0,
     ):
         self.restart_delay = restart_delay
         self.health_check_interval = health_check_interval
+        self.max_memory_mb = max_memory_mb
+        self.cpu_temp_threshold = cpu_temp_threshold
         self.checkpoint_manager = CheckpointManager()
         self.degradation = GracefulDegradation()
         self.consecutive_failures = 0
@@ -304,11 +308,11 @@ class SelfHealingWatchdog:
         status = HealthStatus.HEALTHY
         message = "System operating normally"
 
-        if memory_mb > 4096:  # 4GB threshold
+        if memory_mb > self.max_memory_mb:
             status = HealthStatus.DEGRADED
             message = f"High memory usage: {memory_mb:.1f}MB"
 
-        if cpu_temp and cpu_temp > 85:
+        if cpu_temp and cpu_temp > self.cpu_temp_threshold:
             status = HealthStatus.DEGRADED
             message = f"High CPU temperature: {cpu_temp:.1f}°C"
 

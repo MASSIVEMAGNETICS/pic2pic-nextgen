@@ -13,6 +13,7 @@
 	let previewUrl: string | null = null;
 	let currentJobId: string | null = null;
 	let resultUrl: string | null = null;
+	let errorMessage: string | null = null;
 
 	function handleDragOver(event: DragEvent) {
 		event.preventDefault();
@@ -42,8 +43,9 @@
 	}
 
 	function handleFile(file: File) {
+		errorMessage = null;
 		if (!file.type.startsWith('image/')) {
-			alert('Please upload an image file');
+			errorMessage = 'Please upload an image file (PNG, JPG, WebP)';
 			return;
 		}
 
@@ -105,6 +107,14 @@
 
 <div class="mx-auto max-w-4xl p-6">
 	<h2 class="mb-6 text-2xl font-semibold">Upload Image</h2>
+
+	<!-- Error Message -->
+	{#if errorMessage}
+		<div class="mb-4 flex items-center justify-between rounded-lg bg-red-500/20 px-4 py-3 text-red-400">
+			<span>{errorMessage}</span>
+			<button class="ml-4 text-xl hover:text-red-300" on:click={() => (errorMessage = null)}>×</button>
+		</div>
+	{/if}
 
 	<!-- Upload Area -->
 	<div

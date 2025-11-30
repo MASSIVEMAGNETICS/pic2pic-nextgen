@@ -57,10 +57,11 @@ fn main() {
         ])
         .setup(|app| {
             // Get the main window
-            let window = app.get_webview_window("main").unwrap();
-            
-            // Set window title
-            window.set_title("pic2pic-nextgen v2.0.0").unwrap();
+            if let Some(window) = app.get_webview_window("main") {
+                // Set window title
+                window.set_title("pic2pic-nextgen v2.0.0")
+                    .expect("Failed to set window title");
+            }
             
             Ok(())
         })

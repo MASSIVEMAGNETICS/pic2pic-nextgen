@@ -12,7 +12,7 @@ from uuid import uuid4
 from fastapi import APIRouter, File, HTTPException, Query, UploadFile
 from pydantic import BaseModel
 
-from ..config import settings
+from ..config import settings, DeploymentTier
 from ..core.engine import (
     HolographicMemoryBank,
     HolographicParameters,
@@ -371,7 +371,7 @@ async def get_dev_parameters(
     dev_mode: Annotated[bool, Query(description="Enable dev mode access")] = False,
 ):
     """Get current engine parameters (dev mode only)."""
-    if not dev_mode and settings.deployment_tier != settings.deployment_tier.DEV_ALPHA:
+    if not dev_mode and settings.deployment_tier != DeploymentTier.DEV_ALPHA:
         raise HTTPException(status_code=403, detail="Dev mode required")
 
     engine = get_engine()
@@ -396,7 +396,7 @@ async def update_dev_parameters(
     dev_mode: Annotated[bool, Query(description="Enable dev mode access")] = False,
 ):
     """Update engine parameters (dev mode only)."""
-    if not dev_mode and settings.deployment_tier != settings.deployment_tier.DEV_ALPHA:
+    if not dev_mode and settings.deployment_tier != DeploymentTier.DEV_ALPHA:
         raise HTTPException(status_code=403, detail="Dev mode required")
 
     engine = get_engine()
