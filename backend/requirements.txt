@@ -1,0 +1,33 @@
+# FastAPI Backend Dependencies
+# pic2pic-nextgen v2.0.0
+
+# Core Web Framework
+fastapi==0.115.5
+uvicorn[standard]==0.32.1
+
+# WebSocket and async support
+websockets==14.1
+sse-starlette==2.2.1
+
+# Data validation
+pydantic==2.10.2
+pydantic-settings==2.6.1
+
+# Image processing
+Pillow==11.0.0
+
+# System monitoring
+psutil==6.1.0
+
+# PyTorch for holographic reconstruction (optional - install separately for CUDA)
+# torch>=2.0.0
+
+# Utilities
+python-multipart==0.0.17
+aiofiles==24.1.0
+watchdog==6.0.0
+
+# Testing
+pytest==8.3.3
+pytest-asyncio==0.24.0
+httpx==0.28.1
